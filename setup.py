@@ -2,6 +2,8 @@ from setuptools import setup
 from distutils.core import Command
 import os
 import sys
+import codecs
+
 
 class TestCommand(Command):
     description = "Run tests"
@@ -20,23 +22,27 @@ class TestCommand(Command):
 
 setup(
     name='mafan',
-    version='0.2.6',
+    version='0.3.1',
     author='Herman Schaaf',
     author_email='herman@ironzebra.com',
-    packages=['mafan', 'mafan.hanzidentifier'],
+    packages=[
+        'mafan',
+        'mafan.hanzidentifier',
+        'mafan.third_party',
+        'mafan.third_party.jianfan'
+    ],
     scripts=['bin/convert.py'],
     url='https://github.com/hermanschaaf/mafan',
     license='LICENSE.txt',
     description='A toolbox for working with the Chinese language in Python',
-    long_description=open('docs/README.md').read(),
+    long_description=codecs.open('docs/README.md', 'r', 'utf-8').read(),
     cmdclass={
         'test': TestCommand,
     },
     install_requires=[
-        "jieba == 0.29",
+        "jieba == 0.37",
         "argparse == 1.1",
         "chardet == 2.1.1",
-        "wsgiref == 0.1.2",
-        "jianfan == 0.0.1",
+        "future",
     ],
 )
